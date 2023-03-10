@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+package proto;
+
+service Registr {
+    rpc Reg(Request) returns (Response) {}
+}
+
+message Request {
+    string state = 1;
+    string nickname = 2;
+    string region = 3;
+}
+
+message Response {
+    string access_token = 1;
+    string refresh_token = 2;
+}
