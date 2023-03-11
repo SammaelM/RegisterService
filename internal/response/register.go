@@ -82,7 +82,7 @@ func RegisterUser(code, nickname, region string, ch chan *storage.Response) {
 
 	result := request.RequestCheckNickname(token, nickname, region)
 
-	if result == "303" || result == "404" { // 303 - ошибка, ник не совпал
+	if result == "303" || result == "404" { // 303 - ошибка, ник не совпал или не тот регион
 		ch <- &storage.Response{
 			AccessToken:  result,
 			RefreshToken: result,
