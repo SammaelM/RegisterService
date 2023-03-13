@@ -61,7 +61,7 @@ func (GRPServer) Reg(ctx context.Context, req *proto.Request) (*proto.Response, 
 			}
 		}
 		if i == 1 {
-			result = &storage.Response{AccessToken: "101", RefreshToken: "101"}
+			result = &storage.Response{AccessToken: "101", RefreshToken: "101", Err: "101"}
 			//101 - Превышено время ожидания пользователя
 		}
 		time.Sleep(30 * time.Second)
