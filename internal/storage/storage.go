@@ -3,6 +3,7 @@ package storage
 type Response struct {
 	AccessToken  string
 	RefreshToken string
+	Err          string
 }
 
 type ResponseAPI struct {

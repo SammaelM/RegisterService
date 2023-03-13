@@ -66,7 +66,7 @@ func (GRPServer) Reg(ctx context.Context, req *proto.Request) (*proto.Response, 
 		}
 		time.Sleep(30 * time.Second)
 	}
-	return &proto.Response{AccessToken: result.AccessToken, RefreshToken: result.RefreshToken}, nil
+	return &proto.Response{AccessToken: result.AccessToken, RefreshToken: result.RefreshToken, Err: result.Err}, nil
 }
 
 func RegisterUser(code, nickname, region string, ch chan *storage.Response) {
@@ -77,6 +77,7 @@ func RegisterUser(code, nickname, region string, ch chan *storage.Response) {
 		ch <- &storage.Response{
 			AccessToken:  "404", //404 - ошибка запроса
 			RefreshToken: "404",
+			Err:          "404",
 		}
 	}
 
@@ -86,11 +87,13 @@ func RegisterUser(code, nickname, region string, ch chan *storage.Response) {
 		ch <- &storage.Response{
 			AccessToken:  result,
 			RefreshToken: result,
+			Err:          result,
 		}
 	} else {
 		ch <- &storage.Response{
 			AccessToken:  token,
 			RefreshToken: reftoken,
+			Err:          "200", //200 - ok
 		}
 	}
 
