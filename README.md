@@ -7,7 +7,7 @@ With gRPC, you establish a connection to it and transfer data.
 ! The service must be located at a separate address, this address is sent by the link that you send to users in the redirect_uri parameter. You also have to generate the uuid for the parameter state by reference yourself! Link example: https://exbo.net/oauth/authorize?client_id=[your_id_client]&redirect_uri=[your_link_on_service_register]&scope=&response_type=code&state=[uuid] 
 
 The service accepts a nickname, state and region as input.
-Returns a token and refresh  token.
+Returns a token, refresh token and Err.
 
 the nickname you get from the user. The service compares the nickname and nickname associated with the token, if they match, then the user is the one whose nickname introduced himself.
 
@@ -39,7 +39,7 @@ If desired, they can be changed.
 3002 - Processes user requests.
 
 
-The service can return errors inside the token and update the token.
+The service can return errors inside Err.
 404 is a default error.
 303 - the nickname sent did not match the nickname of the token owner.
 101 - the user's waiting time has been exceeded (the service is waiting for the user to register, this is given 1 minute).
