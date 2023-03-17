@@ -26,7 +26,7 @@ func ParseFlag() (resullt storage.UrlValues) {
 	return *str
 }
 
-func Request(code string) (string, string, error) {
+func Request(code string) (string, string) {
 
 	result := ParseFlag()
 
@@ -42,17 +42,17 @@ func Request(code string) (string, string, error) {
 
 	resp, err := http.PostForm("https://exbo.net/oauth/token", data)
 	if err != nil {
-		return "", "", err
+		return "404", "404"
 	}
 
 	body := &storage.ResponseAPI{}
 
 	if err = json.NewDecoder(resp.Body).Decode(body); err != nil {
 		fmt.Println("could not decode request body", err)
-		return "", "", err
+		return "404", "404"
 	}
 
 	defer resp.Body.Close()
 
-	return body.Access_token, body.Refresh_token, nil
+	return body.Access_token, body.Refresh_token
 }

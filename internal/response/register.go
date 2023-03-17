@@ -2,7 +2,6 @@ package response
 
 import (
 	"context"
-	"log"
 	"mainmod/api/grpc/proto"
 	"mainmod/internal/request"
 	"mainmod/internal/storage"
@@ -72,12 +71,11 @@ func (GRPServer) Reg(ctx context.Context, req *proto.Request) (*proto.Response, 
 
 func RegisterUser(code, nickname, region string, ch chan *storage.Response) {
 
-	token, reftoken, err := request.Request(code)
-	if err != nil {
-		log.Print(err)
+	token, reftoken := request.Request(code)
+	if token == "404" {
 		ch <- &storage.Response{
-			AccessToken:  "404", //404 - ошибка запроса
-			RefreshToken: "404",
+			AccessToken:  token, //404 - ошибка запроса
+			RefreshToken: reftoken,
 			Err:          "404",
 		}
 	}

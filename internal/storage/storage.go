@@ -5,6 +5,11 @@ type Response struct {
 	RefreshToken string
 	Err          string
 }
+type UrlValues struct {
+	Client_id     string
+	Client_secret string
+	Redirect_uri  string
+}
 
 type ResponseAPI struct {
 	Token_type    string `json:"token_type"`
@@ -36,10 +41,4 @@ type ResponseApiChek struct {
 		Rank     string `json:"rank"`
 		JoinTime string `json:"joinTime"`
 	}
-}
-
-type UrlValues struct {
-	Client_id     string
-	Client_secret string
-	Redirect_uri  string
 }
