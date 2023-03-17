@@ -57,6 +57,7 @@ func (GRPServer) Reg(ctx context.Context, req *proto.Request) (*proto.Response, 
 				go RegisterUser(Code, req.Nickname, req.Region, ch)
 
 				result = <-ch
+				defer close(ch)
 				i = 2
 			}
 		}

@@ -5,35 +5,23 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"mainmod/internal/storage"
 	"net/http"
 	"net/url"
 )
 
-type ResponseAPI struct {
-	Token_type    string `json:"token_type"`
-	Expires_in    int64  `json:"expires_in"`
-	Access_token  string `json:"access_token"`
-	Refresh_token string `json:"refresh_token"`
-}
-
-type UrlValues struct {
-	client_id     string
-	client_secret string
-	redirect_uri  string
-}
-
-func ParseFlag() (resullt UrlValues) {
+func ParseFlag() (resullt storage.UrlValues) {
 	// flag
 	flag.Parse()
 	if flag.NArg() < 3 {
 		log.Fatal("no enough arguments")
 	}
 
-	str := &UrlValues{}
+	str := &storage.UrlValues{}
 
-	str.client_id = flag.Arg(0)
-	str.client_secret = flag.Arg(1)
-	str.redirect_uri = flag.Arg(2)
+	str.Client_id = flag.Arg(0)
+	str.Client_secret = flag.Arg(1)
+	str.Redirect_uri = flag.Arg(2)
 
 	return *str
 }
@@ -43,13 +31,13 @@ func Request(code string) (string, string, error) {
 	result := ParseFlag()
 
 	data := url.Values{
-		"client_id":     {result.client_id},
-		"client_secret": {result.client_secret},
+		"client_id":     {result.Client_id},
+		"client_secret": {result.Client_secret},
 		"code":          {code},
 
 		"grant_type": {"authorization_code"},
 
-		"redirect_uri": {result.redirect_uri},
+		"redirect_uri": {result.Redirect_uri},
 	}
 
 	resp, err := http.PostForm("https://exbo.net/oauth/token", data)
@@ -57,7 +45,7 @@ func Request(code string) (string, string, error) {
 		return "", "", err
 	}
 
-	body := &ResponseAPI{}
+	body := &storage.ResponseAPI{}
 
 	if err = json.NewDecoder(resp.Body).Decode(body); err != nil {
 		fmt.Println("could not decode request body", err)

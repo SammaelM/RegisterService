@@ -4,34 +4,9 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"mainmod/internal/storage"
 	"net/http"
 )
-
-type ResponseApiChek struct {
-	Information struct {
-		Id           string `json:"id"`
-		Name         string `json:"name"`
-		CreationTime string `json:"creationTime"`
-	}
-	Clan struct {
-		Id               string `json:"id"`
-		Name             string `json:"name"`
-		Tag              string `json:"tag"`
-		Level            int    `json:"level"`
-		LevelPoints      int    `json:"levelPoints"`
-		RegistrationTime string `json:"registrationTime"`
-		Alliance         string `json:"alliance"`
-		Description      string `json:"description"`
-		Leader           string `json:"leader"`
-		MemberCount      int    `json:"memberCount"`
-	}
-
-	Member struct {
-		Name     string `json:"name"`
-		Rank     string `json:"rank"`
-		JoinTime string `json:"joinTime"`
-	}
-}
 
 func RequestCheckNickname(token, nickname, region string) (status string) {
 	//https://eapi.stalcraft.net/region/character/by-name/character/profile
@@ -56,7 +31,7 @@ func RequestCheckNickname(token, nickname, region string) (status string) {
 		return "404"
 	}
 
-	var info []ResponseApiChek
+	var info []storage.ResponseApiChek
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
