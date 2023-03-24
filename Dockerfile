@@ -13,7 +13,6 @@ RUN go mod download
 RUN go build -o main ./cmd/main.go
 
 
-EXPOSE  3002 
-EXPOSE 3001
+EXPOSE 3002 3001
 
 CMD ["./main", "", "", ""]
