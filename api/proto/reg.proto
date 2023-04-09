@@ -11,7 +11,7 @@ service Registr {
 message Request {
     string state = 1;
     string nickname = 2;
-    string region = 3;
+    string region = 3;  
 }
 
 message Response {
