@@ -26,7 +26,7 @@ Add the following parameters to the quotes:
 You get them from the telegram bot Starcraft API.
 
 to launch docker image:
-1) ```sudo docker build -d regservice .```
+1) ```sudo docker build -t regservice .```
 2) ```docker run -p 3001:3001 -p 3002:3002 regservice```
   
 proto file - ```protoc  --go_out=api/grpc --go-grpc_out=api/grpc api/proto/reg.proto```
