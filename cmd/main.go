@@ -22,7 +22,7 @@ func main() {
 		}
 	}()
 
-	//run connect grpc/
+	//run connect grpc//
 	l, err := net.Listen("tcp", ":3001")
 	if err != nil {
 		log.Fatal(err)
