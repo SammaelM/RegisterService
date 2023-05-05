@@ -27,7 +27,7 @@ You get them from the telegram bot Starcraft API.
 
 to launch docker image:
 1) ```sudo docker build -t regservice .```
-2) ```docker run -p 3001:3001 -p 3002:3002 regservice```
+2) ```docker run -p 3001:3001 -p 3002:3002 -d --name regservice regservice```
   
 proto file - ```protoc  --go_out=api/grpc --go-grpc_out=api/grpc api/proto/reg.proto```
 
