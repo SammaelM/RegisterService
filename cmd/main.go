@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	//grpc
+	//grpc/
 	if err := server.RegServ().Serve(l); err != nil {
 		log.Fatal(err)
 	}
